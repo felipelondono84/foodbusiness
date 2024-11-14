@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Rating extends Model
+class Scanner extends Model
 {
     use HasFactory;
 
@@ -17,13 +17,9 @@ class Rating extends Model
     public function companies(){
         return $this->belongsTo(Company::class);
     }
-    public function description(){
-        return $this->belongsTo(ConditionPoint::class);
-    }
-
+    
     public function punto()
     {
         return $this->belongsTo(Point::class);
     }
-
 }

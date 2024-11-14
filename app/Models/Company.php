@@ -18,4 +18,13 @@ class Company extends Model
     public function supervisor(){
         return $this->belongsTo(User::class);
     }
+
+    public function puntosDeVenta()
+    {
+        return $this->hasMany(Point::class);
+    }
+
+    protected $attributes = [
+        'points' => 0,
+    ];
 }

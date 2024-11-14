@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\ChecklistItem;
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,11 +13,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        $items = [
+            'Apertura confirmada',
+            'Verificación de condiciones del clima',
+            'Verificación de aplicaciones de entregas',
+        ];
+    
+        foreach ($items as $item) {
+            ChecklistItem::create(['name' => $item]);
+        }
     }
 }

@@ -26,6 +26,20 @@ class CompanyResource extends Resource
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),
+                Forms\Components\HasManyRepeater::make('points')
+                    ->relationship('puntosDeVenta')
+                    ->label('Points')
+                    ->schema([
+                        Forms\Components\TextInput::make('nombre')
+                            ->required()
+                            ->label('name')
+                            ->maxLength(255),
+                        // Forms\Components\TextInput::make('direccion')
+                        //     ->maxLength(255),
+                        // Forms\Components\TextInput::make('telefono')
+                        //     ->tel()
+                        //     ->maxLength(15),
+                    ]),    
                 Forms\Components\TextInput::make('email')
                     ->email()
                     ->required()
@@ -52,6 +66,8 @@ class CompanyResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
+                // Tables\Columns\TextColumn::make('points')
+                //     ->searchable(),    
                 Tables\Columns\TextColumn::make('email')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('phone')
