@@ -17,9 +17,9 @@ return new class extends Migration
             $table->foreignId('companies_id')->constrained()->onDelete('cascade');
             $table->foreignId('point_id')->constrained()->onDelete('cascade');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->string('type');
+            $table->foreignId('type_id')->constrained()->onDelete('cascade');
+            $table->string('observation');
             $table->string('image');
-            $table->date('date_default');
             $table->timestamps();
         });
     }

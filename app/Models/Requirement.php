@@ -14,4 +14,11 @@ class Requirement extends Model
     public function user(){
         return $this->belongsTo(User::class);
     }
+    public function companies(){
+        return $this->belongsTo(Company::class);
+    }
+    public function punto()
+    {
+        return $this->belongsTo(Point::class);
+    }
 }

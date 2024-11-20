@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('image');
             $table->date('date_ini');
             $table->date('date_finish');
+            $table->foreignId('companies_id')->constrained()->onDelete('cascade');
+            $table->foreignId('point_id')->constrained()->onDelete('cascade');
             $table->enum('status', ['pending', 'finish', 'active'])->default('active'); // Agrega la columna 'status' con tres estados
             $table->timestamps();
         });

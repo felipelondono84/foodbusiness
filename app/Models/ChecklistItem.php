@@ -21,4 +21,8 @@ class ChecklistItem extends Model
     {
         return $this->belongsTo(Point::class);
     }
+    public function condition()
+    {
+        return $this->belongsTo(Condition::class);
+    }
 }

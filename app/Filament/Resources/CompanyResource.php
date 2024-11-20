@@ -34,11 +34,14 @@ class CompanyResource extends Resource
                             ->required()
                             ->label('name')
                             ->maxLength(255),
-                        // Forms\Components\TextInput::make('direccion')
-                        //     ->maxLength(255),
-                        // Forms\Components\TextInput::make('telefono')
-                        //     ->tel()
-                        //     ->maxLength(15),
+                        Forms\Components\TextInput::make('city')
+                            ->maxLength(255), 
+                        Forms\Components\TextInput::make('state')
+                            ->maxLength(255),      
+                        Forms\Components\TextInput::make('address_point')
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('code_postal')
+                            ->maxLength(255), 
                     ]),    
                 Forms\Components\TextInput::make('email')
                     ->email()

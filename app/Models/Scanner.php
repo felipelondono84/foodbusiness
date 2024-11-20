@@ -22,4 +22,8 @@ class Scanner extends Model
     {
         return $this->belongsTo(Point::class);
     }
+    public function type()
+    {
+        return $this->belongsTo(TypeCorrespondence::class);
+    }
 }

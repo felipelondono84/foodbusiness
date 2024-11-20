@@ -49,15 +49,11 @@ class ChecklistItemResource extends Resource
                     })
                     ->required(),//ampo obligatorio/ Asegúrate de que sea un campo numérico      
                 Forms\Components\Select::make('user_id')
-                ->relationship(name: 'user', titleAttribute: 'name')
-                ->required(),
-                Forms\Components\Select::make('name')
-                    ->label('Seleccionar opción')
-                    ->options([
-                        'apertura_confirmada' => 'Apertura confirmada',
-                        'verificacion_clima' => 'Verificación de condiciones del clima',
-                        'verificacion_aplicaciones' => 'Verificación de aplicaciones de entregas',
-                    ]),
+                    ->relationship(name: 'user', titleAttribute: 'name')
+                    ->required(),
+                Forms\Components\Select::make('condition_id')
+                    ->relationship(name: 'condition', titleAttribute: 'name')
+                    ->required(),
                 Forms\Components\TextInput::make('observation')
                     ->required()
                     ->maxLength(255)   
@@ -71,7 +67,7 @@ class ChecklistItemResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')
+                Tables\Columns\TextColumn::make('condition.name')
                     ->label('Nombre'),
                 Tables\Columns\TextColumn::make('companies.name')
                     ->numeric()

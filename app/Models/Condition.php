@@ -5,14 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Point extends Model
+class Condition extends Model
 {
     use HasFactory;
 
     protected $guarded = [];
+
     
-    public function empresa(): BelongsTo
-    {
-        return $this->belongsTo(Company::class);
-    }
 }

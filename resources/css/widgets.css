@@ -1,0 +1,31 @@
+/* Estilos para el widget de programación */
+.programming-widget {
+    padding: 1.5rem;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+}
+
+.programming-widget h2 {
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.programming-widget ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.programming-widget li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.programming-widget li:last-child {
+    border-bottom: none;
+}
+
+.programming-widget li span {
+    font-weight: bold;
+    color: #007bff;
+}

@@ -16,8 +16,9 @@ return new class extends Migration
             $table->foreignId('companies_id')->constrained()->onDelete('cascade');
             $table->foreignId('point_id')->constrained()->onDelete('cascade');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->string('name'); // Nombre del ítem
+            $table->foreignId('condition_id')->constrained()->onDelete('cascade');
             $table->boolean('completed')->default(false); // Estado de si se ha completado
+            $table->string('observation');           
             $table->timestamps();
         });
     }

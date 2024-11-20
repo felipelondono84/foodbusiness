@@ -5,6 +5,8 @@ namespace App\Filament\Supervisor\Resources;
 use App\Filament\Supervisor\Resources\ProgrammingResource\Pages;
 use App\Filament\Supervisor\Resources\ProgrammingResource\RelationManagers;
 use App\Models\Programming;
+use App\Models\Company;
+use App\Models\Point;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -43,9 +45,26 @@ class ProgrammingResource extends Resource
                 //     ->required()
                 //     ->numeric(),
                 Forms\Components\Select::make('companies_id')
-                    ->relationship(name: 'companies', titleAttribute: 'name')
-                    ->label('Company')
-                    ->required(),
+                    ->label('Empresa')
+                    ->options(Company::all()->pluck('name', 'id')->toArray()) // Asegúrate de convertirlo a un array
+                    ->required()
+                    ->reactive()
+                    ->afterStateUpdated(function (callable $set) {
+                        $set('point_id', null); // Reset point_id when companies_id changes
+                }),
+
+                // Dependent Select for Punto de Venta
+                Forms\Components\Select::make('point_id')
+                    ->label('Punto de Venta')
+                    ->options(function (callable $get) {
+                        $empresaId = $get('companies_id');
+                        if ($empresaId) {
+                            $options = Point::where('company_id', $empresaId)->pluck('nombre', 'id')->toArray();
+                            return $options ?: []; // Devuelve un array vacío si no hay opciones
+                        }
+                        return [];
+                    })
+                ->required(),//ampo obligatorio/ Asegúrate de que sea un campo numérico    
                 Forms\Components\DateTimePicker::make('date'),
             ]);
     }
@@ -62,7 +81,7 @@ class ProgrammingResource extends Resource
                 // Tables\Columns\TextColumn::make('user_id')
                 //     ->numeric()
                 //     ->sortable(),
-                Tables\Columns\TextColumn::make('comanpanies.name')
+                Tables\Columns\TextColumn::make('companies.name')
                     ->label('Company')
                         ->numeric()
                         ->sortable(),

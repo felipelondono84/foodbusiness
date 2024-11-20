@@ -30,7 +30,7 @@ class ScannerResource extends Resource
                 Forms\Components\TextInput::make('description')
                     ->required()
                     ->maxLength(255),
-                    Forms\Components\Select::make('companies_id')
+                Forms\Components\Select::make('companies_id')
                     ->label('Empresa')
                     ->options(Company::all()->pluck('name', 'id')->toArray()) // Asegúrate de convertirlo a un array
                     ->required()
@@ -52,19 +52,23 @@ class ScannerResource extends Resource
                     })
                     ->required(),//ampo obligatorio/ Asegúrate de que sea un campo numérico      
                 Forms\Components\Select::make('user_id')
-                ->relationship(name: 'user', titleAttribute: 'name')
-                ->required(),
-                Forms\Components\TextInput::make('type')
-                    ->required()
-                    ->maxLength(255),
+                    ->relationship(name: 'user', titleAttribute: 'name')
+                    ->required(),
+                Forms\Components\Select::make('type_id')
+                    ->relationship(name: 'type', titleAttribute: 'name')
+                    ->required(),
                 Forms\Components\FileUpload::make('image')
                     ->image()
                     ->required(),
-                Forms\Components\DatePicker::make('date_default')
-                    ->default(Carbon::now()->toDateString()) // Establece la fecha actual como valor por defecto
-                    ->displayFormat('Y-m-d') // Formato de visualización opcional
-                    ->required() // Si es un campo obligatorio
-                    ->disabled(), // Deshabilita el campo
+                Forms\Components\Textarea::make('observation')
+                    ->required()
+                    ->maxLength(255)   
+                    ->extraAttributes(['style' => 'width: 100%; height: 100px;']), 
+                // Forms\Components\DatePicker::make('date_default')
+                //     ->default(Carbon::now()->toDateString()) // Establece la fecha actual como valor por defecto
+                //     ->displayFormat('Y-m-d') // Formato de visualización opcional
+                //     ->required() // Si es un campo obligatorio
+                //     ->disabled(), // Deshabilita el campo
             ]);
     }
 
@@ -83,11 +87,11 @@ class ScannerResource extends Resource
                 Tables\Columns\TextColumn::make('user.name')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('type')
+                Tables\Columns\TextColumn::make('type.name')
                     ->searchable(),
                 Tables\Columns\ImageColumn::make('image'),
-                Tables\Columns\TextColumn::make('date_default')
-                    ->date()
+                Tables\Columns\TextColumn::make('observation')
+                    
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
