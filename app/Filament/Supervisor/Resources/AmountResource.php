@@ -51,15 +51,33 @@ class AmountResource extends Resource
                     })
                     ->required(),//ampo obligatorio/ Asegúrate de que sea un campo numérico      
                 Forms\Components\Select::make('user_id')
-                ->relationship(name: 'user', titleAttribute: 'name')
-                ->required(),
+                    ->relationship(name: 'user', titleAttribute: 'name')
+                    ->label('Recibe')
+                    ->required(),
+                Forms\Components\DatePicker::make('date_recibido')
+                   
+                    ->label('Recibe')
+                    ->displayFormat('d/m/Y')
+                    ->required(),
+                Forms\Components\Select::make('responsible_id')
+                    ->relationship(name: 'responsible', titleAttribute: 'name')
+                    ->label('A quien entrega')
+                    ->required(),
+                Forms\Components\DatePicker::make('date_entrega')
+                   
+                    ->label('Entrega')
+                    ->displayFormat('d/m/Y')
+                    ->required(),    
                 Forms\Components\TextInput::make('amount')
                     ->prefix('$')
                     ->mask(RawJs::make('$money($input)'))
                     ->stripCharacters(',')
                     ->numeric(),
+                Forms\Components\TextInput::make('deposito')
+                    ->label('Deposito en bank')
+                    ->maxLength(255),    
                 Forms\Components\TextInput::make('description')
-                    ->required()
+                    
                     ->maxLength(255),
             ]);
     }
@@ -75,8 +93,13 @@ class AmountResource extends Resource
                 //     ->numeric()
                 //     ->sortable(),
                 Tables\Columns\TextColumn::make('user.name')
+                    ->label('Recibe')
                     ->numeric()
                     ->sortable(),
+                Tables\Columns\TextColumn::make('responsible.name')
+                    ->label('A quien entrega')
+                    ->sortable()
+                    ->searchable(),    
                 Tables\Columns\TextColumn::make('amount')
                     ->searchable()
                     ->formatStateUsing(fn ($state) => '$' . number_format($state, 2, '.', ',')), // Agrega el símbolo de dólar y formatea el número

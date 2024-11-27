@@ -22,4 +22,8 @@ class Amount extends Model
     {
         return $this->belongsTo(Point::class);
     }
+    public function responsible()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

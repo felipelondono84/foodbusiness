@@ -25,5 +25,9 @@ class Rating extends Model
     {
         return $this->belongsTo(Point::class);
     }
+    public static function getAverageRatingByUser($userId)
+    {
+        return self::where('user_id', $userId)->avg('rating');
+    }
 
 }

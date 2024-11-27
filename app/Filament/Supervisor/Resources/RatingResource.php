@@ -31,6 +31,7 @@ class RatingResource extends Resource
     {
         return parent::getEloquentQuery()->where('user_id', Auth::user()->id);
     }
+    
 
     public static function form(Form $form): Form
     {
